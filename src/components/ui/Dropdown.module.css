@@ -1,0 +1,83 @@
+.dropdownBox {
+  position: relative;
+  width: 100%;
+}
+
+.selectBtn {
+  position: relative;
+  padding-left: 16px;
+  width: 100%;
+  height: 50px;
+  border: 1px solid var(--gray300);
+  border-radius: 8px;
+  color: var(--gray500);
+  text-align: left;
+}
+
+.selectBtn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 17px;
+  width: 14px;
+  height: 8px;
+  background: url(/assets/images/common/arrow_icon.svg)no-repeat right center;
+  transition: all .5s;
+}
+
+.selectBtn.active::after {
+  transform: translateY(-50%) rotate(-180deg);
+}
+
+.optionList {
+  opacity: 0;
+  position: absolute;
+  top: 58px;
+  left: 0;
+  right: 0;
+  border: 1px solid var(--gray300);
+  background-color: var(--white);
+  border-radius: 8px;
+  z-index: 999;
+  visibility: hidden;
+  transition: all .5s;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+.optionList.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.optionBtn {
+  display: block;
+  width: 100%;
+  padding: 13px 10px 13px 16px;
+  text-align: left;
+  color: var(--gray900);
+  transition: all .5s;
+}
+
+.optionBtn:hover {
+  background-color: var(--gray100);
+}
+
+@media (max-width: 767px) {
+
+  .selectBtn {
+    padding-left: 10px;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  .optionList {
+    top: 46px;
+  }
+
+  .optionBtn {
+    font-size: 14px;
+  }
+
+}
