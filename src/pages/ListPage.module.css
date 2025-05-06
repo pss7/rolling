@@ -1,0 +1,66 @@
+.title {
+  margin-bottom: 5px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.listBox {
+  margin-left: -20px;
+  padding: 20px;
+  display: flex;
+  gap: 0 20px;
+  overflow: hidden;
+}
+
+.listBox a {
+  display: block;
+  flex-shrink: 0;
+  padding: 30px 24px 0;
+  width: 282px;
+  height: 260px;
+  border-radius: 16px;
+  background-color: var(--purple200);
+  border: 1px solid var(--gray300);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.listBox a .textBox {
+  height: 157px;
+  padding-bottom: 43px;
+  border-bottom: 1px solid var(--gray300);
+}
+
+.listBox a h3 {
+  margin-bottom: 12px;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--gray900);
+}
+
+.listBox a p {
+  color: var(--gray700);
+}
+
+.listBox .iconBox {
+  height: 73px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 8px;
+  align-items: center;
+}
+
+.listBox .iconBox span {
+  display: flex;
+  justify-content: center;
+  gap: 0 2px;
+  padding: 6px 12px;
+  min-width: 65px;
+  background-color: rgba(0, 0, 0, 0.54);
+  border-radius: 50px;
+  color: var(--white);
+}
+
+.listBox .iconBox span em {
+  margin-top: -1px;
+}

@@ -7,7 +7,7 @@ export default function Component() {
 
   return (
     <div className={styles.componentBox}>
-      <h1>
+      <h1 className={styles.title}>
         Input 컴포넌트
       </h1>
       <div className={styles.box}>
@@ -27,7 +27,7 @@ export default function Component() {
           error="Error Message"
         />
       </div>
-      <h1>
+      <h1 className={styles.title}>
         Dropdown 컴포넌트
       </h1>
       <div className={styles.box}>
@@ -49,7 +49,7 @@ export default function Component() {
           option={["옵션1", "옵션2", "옵션3"]}
         />
       </div>
-      <h1>
+      <h1 className={styles.title}>
         Button 컴포넌트
       </h1>
       <div className={styles.box}>

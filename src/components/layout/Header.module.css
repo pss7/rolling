@@ -1,0 +1,37 @@
+#header {
+  border-bottom: 1px solid var(--gray200);
+}
+
+.layoutBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logoBox h1 a {
+  padding: 16px 0;
+}
+
+.logoBox h1 a,
+.logoBox h1 a img {
+  display: block;
+}
+
+.rollingAddLink {
+  width: 157px;
+  height: 40px;
+  line-height: 36px;
+  border: 1px solid var(--gray300);
+  color: var(--gray900);
+  border-radius: 6px;
+  text-align: center;
+}
+
+@media (max-width: 767px) {
+
+  .rollingAddLink {
+    width: 130px;
+    font-size: 14px;
+  }
+
+}
