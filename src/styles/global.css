@@ -47,6 +47,10 @@
 
 }
 
+#root {
+  overflow-x: hidden;
+}
+
 :disabled {
   background-color: var(--gray100);
   color: var(--gray400);

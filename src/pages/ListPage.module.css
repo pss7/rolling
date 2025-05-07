@@ -6,6 +6,7 @@
 }
 
 .listBox {
+  position: relative;
   margin-left: -20px;
   padding: 20px;
   display: flex;
@@ -14,15 +15,95 @@
 }
 
 .listBox a {
+  position: relative;
   display: block;
   flex-shrink: 0;
   padding: 30px 24px 0;
-  width: 282px;
   height: 260px;
   border-radius: 16px;
-  background-color: var(--purple200);
   border: 1px solid var(--gray300);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+  z-index: 1;
+}
+
+.listBox .control {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 9;
+}
+
+.listBox .control button {
+  position: relative;
+  width: 56px;
+  height: 56px;
+}
+
+.listBox .control .prevBtn {
+  left: -26px;
+  background: url(/assets/images/sub/prev_icon.svg)no-repeat center;
+}
+
+.listBox .control .nextBtn {
+  right: 13px;
+  background: url(/assets/images/sub/next_icon.svg)no-repeat center;
+}
+
+.listBox .slide {
+  width: 279px !important;
+}
+
+.listBox a.beige {
+  background-color: var(--beige200) !important;
+}
+
+.listBox a.purple {
+  background-color: var(--purple200) !important;
+}
+
+.listBox a.blue {
+  background-color: var(--blue200) !important;
+}
+
+.listBox a.green {
+  background-color: var(--green200) !important;
+}
+
+.listBox a::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+
+.listBox a.beige::after {
+  width: 142px;
+  height: 142px;
+  background: url(/assets/images/sub/beige_icon.svg)no-repeat center;
+}
+
+.listBox a.purple::after {
+  width: 142px;
+  height: 142px;
+  background: url(/assets/images/sub/purple_icon.svg)no-repeat center;
+}
+
+.listBox a.blue::after {
+  width: 142px;
+  height: 142px;
+  background: url(/assets/images/sub/blue_icon.svg)no-repeat center;
+}
+
+.listBox a.green::after {
+  width: 142px;
+  height: 142px;
+  background: url(/assets/images/sub/green_icon.svg)no-repeat center;
 }
 
 .listBox a .textBox {
@@ -63,4 +144,12 @@
 
 .listBox .iconBox span em {
   margin-top: -1px;
+}
+
+@media (max-width: 1199px){
+
+  .listBox{overflow: visible;}
+  .listBox .control .prevBtn{left: -20px;}
+  .listBox .control .nextBtn{right: 0;}
+
 }
