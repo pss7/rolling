@@ -1,13 +1,17 @@
 
+import Header from "../../components/layout/Header";
 import Main from "../../components/layout/Main";
 import MainPage from "../MainPage";
 
 export default function Home() {
 
   return (
-    <Main id="main">
-      <MainPage />
-    </Main>
+    <>
+      <Header />
+      <Main id="main">
+        <MainPage />
+      </Main>
+    </>
   )
 
 }

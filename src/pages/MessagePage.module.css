@@ -1,0 +1,270 @@
+#messageHedaer .layoutBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 68px;
+  border-bottom: 1px solid var(--gray200);
+}
+
+#messageHedaer .layoutBox .box {
+  display: flex;
+  align-items: center;
+}
+
+#messageHedaer .name {
+  font-weight: 700;
+  font-size: 28px;
+}
+
+#messageHedaer .messageCountBox span {
+  font-size: 18px;
+  color: var(--gray900);
+}
+
+#messageHedaer .profileImageBox {
+  margin-right: 11px;
+  display: flex;
+  gap: 0 0;
+}
+
+#messageHedaer .line {
+  margin: 0 25px;
+  width: 1px;
+  height: 28px;
+  background-color: var(--gray200);
+}
+
+#messageHedaer .profileImageBox .profileImage {
+  margin-right: -8px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50px;
+  overflow: hidden;
+  border: 1px solid var(--white);
+}
+
+#messageHedaer .profileImageBox .profileImage img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#messageHedaer .profileImageBox .defaultImage {
+  position: relative;
+  margin-right: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background-color: var(--white);
+  color: var(--gray500);
+  border: 1px solid var(--gray300);
+  border-radius: 50px;
+  overflow: hidden;
+  font-size: 12px;
+  z-index: 9;
+}
+
+#messageHedaer .profileImageBox .defaultImage:nth-last-of-type(1) {
+  margin-right: 0;
+}
+
+.messageBox {
+  height: 100%;
+  padding: 113px 0 100px !important;
+  position: relative;
+}
+
+.beige {
+  background-color: var(--beige200);
+}
+
+.purple {
+  background-color: var(--purple200);
+}
+
+.blue {
+  background-color: var(--blue200);
+}
+
+.green {
+  background-color: var(--green200);
+}
+
+.messageList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px 2%;
+}
+
+.messageList li {
+  width: 32%;
+  min-height: 280px;
+  padding: 28px 24px 24px;
+  background-color: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.messageList li .messageTopBox {
+  padding-bottom: 15px;
+  display: flex;
+  gap: 0 14px;
+  border-bottom: 1px solid var(--gray200);
+}
+
+.messageList li .imgBox {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  overflow: hidden;
+  border-radius: 50px;
+}
+
+.messageList li .imgBox img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.messageList li .textBox {
+  width: 100%;
+}
+
+.messageList li .textBox .name {
+  margin-bottom: 6px;
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--black);
+}
+
+.messageList li .textBox .relationship {
+  display: inline-block;
+  padding: 0 8px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.messageList li .textBox .puple {
+  background-color: var(--purple100);
+  color: var(--purple500);
+}
+
+.messageList li .textBox .green {
+  background-color: var(--green100);
+  color: var(--green500);
+}
+
+.messageList li .textBox .blue {
+  background-color: var(--blue100);
+  color: var(--blue500);
+}
+
+.messageList li .textBox .beige {
+  background-color: var(--beige100);
+  color: var(--beige500);
+}
+
+.messageList li .messageContent {
+  margin-bottom: 16px;
+  min-height: 117px;
+  padding: 15px 10px 10px 0;
+  font-size: 18px;
+  color: var(--gray600);
+}
+
+.messageList li .date {
+  display: block;
+  font-size: 12px;
+  color: var(--gray400);
+}
+
+.emojiListBox {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0 8px;
+}
+
+.emojiListBox .emoji {
+  padding: 8px 12px;
+  border-radius: 50px;
+  background-color: rgba(0, 0, 0, 0.54);
+  color: var(--white);
+}
+
+.emojiListBox .emoj span {
+  margin-left: 5px;
+}
+
+.emojiListBox .emojiToggleBtn {
+  margin-left: 6px;
+  display: block;
+  width: 14px;
+  height: 8px;
+  background: url(/assets/images/common/arrow_icon.svg)no-repeat center;
+  transition: all .5s;
+}
+
+.emojiListBox .emojiToggleBtn.active {
+  transform: rotate(-180deg);
+}
+
+.emojiListBox .emojiaddList {
+  padding: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  position: absolute;
+  top: 54px;
+  left: 0;
+  right: -20px;
+  background-color: var(--white);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transition: all .5s;
+}
+
+.emojiListBox .emojiaddList.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.emojiListBox .emojiaddList .emojiadd {
+  flex-shrink: 0;
+}
+
+.shareBox .shareBtn {
+  position: relative;
+  padding: 5px 10px;
+  border-radius: 6px;
+  border: 1px solid var(--gray300);
+  color: var(--black);
+}
+
+
+
+
+
+@media (max-width: 1024px) {
+
+  .messageBox {
+    padding: 80px 0 100px !important;
+  }
+
+  .messageList {
+    gap: 15px 2%;
+  }
+
+  .messageList li {
+    width: 49%;
+  }
+
+}

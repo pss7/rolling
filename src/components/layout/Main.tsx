@@ -1,21 +1,23 @@
 
 import { ReactNode } from 'react';
-import Header from './Header';
 
 interface mainProps {
   children?: ReactNode;
   id?: string;
+  className?: string;
+  style?: React.CSSProperties;
 }
 
-export default function Main({ id, children }: mainProps) {
+export default function Main({ id, children, className, style }: mainProps) {
 
   return (
-    <>
-      <Header />
-      <main id={id}>
-        {children}
-      </main>
-    </>
+    <main
+      id={id}
+      className={className}
+      style={style}
+    >
+      {children}
+    </main >
   )
 
 }

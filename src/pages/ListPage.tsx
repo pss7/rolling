@@ -7,6 +7,7 @@ import { getList } from "../api/list";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import '../styles/swiper.css';
+import Header from "../components/layout/Header";
 
 
 export default function ListPage() {
@@ -83,228 +84,239 @@ export default function ListPage() {
   const nextRef02 = useRef(null);
 
   return (
-    <Main id="sub">
-      <Container>
-        <div className={styles.box}>
-          <h2 className={styles.title}>
-            인기 롤링 페이퍼🔥
-          </h2>
-          <div className={styles.listBox}>
-            <Swiper
-              slidesPerView="auto"
-              modules={[Navigation]}
-              navigation={{
-                prevEl: prevRef01.current,
-                nextEl: nextRef01.current,
-              }}
-              pagination={{ clickable: true }}
-              loop={false}
-              breakpoints={{
-                767: {
-                  spaceBetween: 22,
-                },
-                0: {
-                  spaceBetween: 15,
-                },
-              }}
-            >
-              {
-                sortedListData.map((data, index) => {
-                  return (
-                    <SwiperSlide
-                      key={index}
-                      className={styles.slide}
-                    >
-                      <Link to="/"
-                        style={{ backgroundColor: `${data.backgroundColor}` }}
-                        className={
-                          `${data.backgroundColor === "beige" ? `${styles.beige}` : ""}
-                    ${data.backgroundColor === "purple" ? `${styles.purple}` : ""}
-                    ${data.backgroundColor === "blue" ? `${styles.blue}` : ""}
-                    ${data.backgroundColor === "green" ? `${styles.green}` : ""}
-                `
-                        }
+    <>
+      <Header />
+      <Main id="sub">
+        <Container>
+          <div className={styles.box}>
+            <h2 className={styles.title}>
+              인기 롤링 페이퍼🔥
+            </h2>
+            <div className={styles.listBox}>
+              <Swiper
+                slidesPerView="auto"
+                modules={[Navigation]}
+                navigation={{
+                  prevEl: prevRef01.current,
+                  nextEl: nextRef01.current,
+                }}
+                pagination={{ clickable: true }}
+                loop={false}
+                breakpoints={{
+                  767: {
+                    spaceBetween: 22,
+                  },
+                  0: {
+                    spaceBetween: 15,
+                  },
+                }}
+              >
+                {
+                  sortedListData.map((data, index) => {
+                    return (
+                      <SwiperSlide
+                        key={index}
+                        className={styles.slide}
                       >
-                        <div className={styles.textBox}>
-                          <h3>
-                            {data.name}
-                          </h3>
-                          <div className={styles.profileImageBox}>
-                            {
-                              data.recentMessages.length > 0 ? (
-                                <>
-                                  {
-                                    data.recentMessages.map((message, index) => {
-                                      return (
-                                        <div className={styles.profileImage} key={index}>
-                                          <img src={message.profileImageURL} alt="프로필이미지" />
-                                        </div>
-                                      );
-                                    })
-                                  }
-                                  <div className={styles.defaultImage}>
-                                    +{data.messageCount >= 3 ? Number(data.messageCount - 3) : 0}
-                                  </div>
-                                </>
-                              ) : (
-                                <>
-                                  <div className={styles.defaultImage}>
-                                    <span className="blind">기본이미지</span>
-                                  </div>
-                                  <div className={styles.defaultImage}>
-                                    +{data.messageCount >= 3 ? Number(data.messageCount - 3) : 0}
-                                  </div>
-                                </>
-                              )
-                            }
-                          </div>
-                          <p>
-                            <strong>{data.messageCount}</strong>명이 작성했어요!
-                          </p>
-                        </div>
-                        <div className={styles.iconBox}>
-                          {
-                            data.topReactions.map((reaction, index) => {
-                              return (
-                                <span key={index}>
-                                  <em>{reaction.emoji}</em>
-                                  {reaction.count}
-                                </span>
-                              )
-                            })
-                          }
-                        </div>
-                      </Link>
-                    </SwiperSlide>
-                  )
-                })
-              }
-            </Swiper>
-            <div className={styles.control}>
-              <button ref={prevRef01} className={styles.prevBtn}>
-                <span className="blind">이전버튼</span>
-              </button>
-              <button ref={nextRef01} className={styles.nextBtn}>
-                <span className="blind">다음버튼</span>
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className={styles.box}>
-          <h2 className={styles.title}>
-            최근에 만든 롤링 페이퍼 ⭐️️
-          </h2>
-          <div className={styles.listBox}>
-            <Swiper
-              slidesPerView="auto"
-              modules={[Navigation]}
-              navigation={{
-                prevEl: prevRef02.current,
-                nextEl: nextRef02.current,
-              }}
-              pagination={{ clickable: true }}
-              loop={false}
-              breakpoints={{
-                767: {
-                  spaceBetween: 22,
-                },
-                0: {
-                  spaceBetween: 15,
-                },
-              }}
-            >
-              {
-                listData.map((data, index) => {
-                  return (
-                    <SwiperSlide
-                      key={index}
-                      className={styles.slide}
-                    >
-                      <Link to="/"
-                        className={
-                          data.backgroundImageURL
-                            ? styles.backgroundImage
-                            : `${data.backgroundColor === "beige" ? styles.beige : ""}
+                        <Link to={`/message/${data.id}`}
+                          className={
+                            data.backgroundImageURL
+                              ? styles.backgroundImage
+                              : `${data.backgroundColor === "beige" ? styles.beige : ""}
        ${data.backgroundColor === "purple" ? styles.purple : ""}
        ${data.backgroundColor === "blue" ? styles.blue : ""}
        ${data.backgroundColor === "green" ? styles.green : ""}`
-                        }
-                        style={
-                          data.backgroundImageURL
-                            ? {
-                              background: `url(${data.backgroundImageURL}) no-repeat center`,
-                              backgroundSize: "cover",
-                            }
-                            : {}
-                        }
-                      >
-                        <div className={styles.textBox}>
-                          <h3>
-                            {data.name}
-                          </h3>
-                          <div className={styles.profileImageBox}>
+                          }
+                          style={
+                            data.backgroundImageURL
+                              ? {
+                                background: `url(${data.backgroundImageURL}) no-repeat center`,
+                                backgroundSize: "cover",
+                              }
+                              : {}
+                          }
+                        >
+                          <div className={styles.textBox}>
+                            <h3>
+                              {data.name}
+                            </h3>
+                            <div className={styles.profileImageBox}>
+                              {
+                                data.recentMessages.length > 0 ? (
+                                  <>
+                                    {
+                                      data.recentMessages.map((message, index) => {
+                                        return (
+                                          <div className={styles.profileImage} key={index}>
+                                            <img src={message.profileImageURL} alt="프로필이미지" />
+                                          </div>
+                                        );
+                                      })
+                                    }
+                                    <div className={styles.defaultImage}>
+                                      +{data.messageCount >= 3 ? Number(data.messageCount - 3) : 0}
+                                    </div>
+                                  </>
+                                ) : (
+                                  <>
+                                    <div className={styles.defaultImage}>
+                                      <span className="blind">기본이미지</span>
+                                    </div>
+                                    <div className={styles.defaultImage}>
+                                      +{data.messageCount >= 3 ? Number(data.messageCount - 3) : 0}
+                                    </div>
+                                  </>
+                                )
+                              }
+                            </div>
+                            <p>
+                              <strong>{data.messageCount}</strong>명이 작성했어요!
+                            </p>
+                          </div>
+                          <div className={styles.iconBox}>
                             {
-                              data.recentMessages.length > 0 ? (
-                                <>
-                                  {
-                                    data.recentMessages.map((message, index) => {
-                                      return (
-                                        <div className={styles.profileImage} key={index}>
-                                          <img src={message.profileImageURL} alt="프로필이미지" />
-                                        </div>
-                                      );
-                                    })
-                                  }
-                                  <div className={styles.defaultImage}>
-                                    +{data.messageCount >= 3 ? Number(data.messageCount - 3) : 0}
-                                  </div>
-                                </>
-                              ) : (
-                                <>
-                                  <div className={styles.defaultImage}>
-                                    <span className="blind">기본이미지</span>
-                                  </div>
-                                  <div className={styles.defaultImage}>
-                                    +{data.messageCount >= 3 ? Number(data.messageCount - 3) : 0}
-                                  </div>
-                                </>
-                              )
+                              data.topReactions.map((reaction, index) => {
+                                return (
+                                  <span key={index}>
+                                    <em>{reaction.emoji}</em>
+                                    {reaction.count}
+                                  </span>
+                                )
+                              })
                             }
                           </div>
-                          <p>
-                            <strong>{data.messageCount}</strong>명이 작성했어요!
-                          </p>
-                        </div>
-                        <div className={styles.iconBox}>
-                          {
-                            data.topReactions.map((reaction, index) => {
-                              return (
-                                <span key={index}>
-                                  <em>{reaction.emoji}</em>
-                                  {reaction.count}
-                                </span>
-                              )
-                            })
-                          }
-                        </div>
-                      </Link>
-                    </SwiperSlide>
-                  )
-                })
-              }
-            </Swiper>
-            <div className={styles.control}>
-              <button ref={prevRef02} className={styles.prevBtn}>
-                <span className="blind">이전버튼</span>
-              </button>
-              <button ref={nextRef02} className={styles.nextBtn}>
-                <span className="blind">다음버튼</span>
-              </button>
+                        </Link>
+                      </SwiperSlide>
+                    )
+                  })
+                }
+              </Swiper>
+              <div className={styles.control}>
+                <button ref={prevRef01} className={styles.prevBtn}>
+                  <span className="blind">이전버튼</span>
+                </button>
+                <button ref={nextRef01} className={styles.nextBtn}>
+                  <span className="blind">다음버튼</span>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      </Container>
-    </Main>
+          <div className={styles.box}>
+            <h2 className={styles.title}>
+              최근에 만든 롤링 페이퍼 ⭐️️
+            </h2>
+            <div className={styles.listBox}>
+              <Swiper
+                slidesPerView="auto"
+                modules={[Navigation]}
+                navigation={{
+                  prevEl: prevRef02.current,
+                  nextEl: nextRef02.current,
+                }}
+                pagination={{ clickable: true }}
+                loop={false}
+                breakpoints={{
+                  767: {
+                    spaceBetween: 22,
+                  },
+                  0: {
+                    spaceBetween: 15,
+                  },
+                }}
+              >
+                {
+                  listData.map((data, index) => {
+                    return (
+                      <SwiperSlide
+                        key={index}
+                        className={styles.slide}
+                      >
+                        <Link to={`/message/${data.id}`}
+                          className={
+                            data.backgroundImageURL
+                              ? styles.backgroundImage
+                              : `${data.backgroundColor === "beige" ? styles.beige : ""}
+       ${data.backgroundColor === "purple" ? styles.purple : ""}
+       ${data.backgroundColor === "blue" ? styles.blue : ""}
+       ${data.backgroundColor === "green" ? styles.green : ""}`
+                          }
+                          style={
+                            data.backgroundImageURL
+                              ? {
+                                background: `url(${data.backgroundImageURL}) no-repeat center`,
+                                backgroundSize: "cover",
+                              }
+                              : {}
+                          }
+                        >
+                          <div className={styles.textBox}>
+                            <h3>
+                              {data.name}
+                            </h3>
+                            <div className={styles.profileImageBox}>
+                              {
+                                data.recentMessages.length > 0 ? (
+                                  <>
+                                    {
+                                      data.recentMessages.map((message, index) => {
+                                        return (
+                                          <div className={styles.profileImage} key={index}>
+                                            <img src={message.profileImageURL} alt="프로필이미지" />
+                                          </div>
+                                        );
+                                      })
+                                    }
+                                    <div className={styles.defaultImage}>
+                                      +{data.messageCount >= 3 ? Number(data.messageCount - 3) : 0}
+                                    </div>
+                                  </>
+                                ) : (
+                                  <>
+                                    <div className={styles.defaultImage}>
+                                      <span className="blind">기본이미지</span>
+                                    </div>
+                                    <div className={styles.defaultImage}>
+                                      +0
+                                    </div>
+                                  </>
+                                )
+                              }
+                            </div>
+                            <p>
+                              <strong>{data.messageCount}</strong>명이 작성했어요!
+                            </p>
+                          </div>
+                          <div className={styles.iconBox}>
+                            {
+                              data.topReactions.map((reaction, index) => {
+                                return (
+                                  <span key={index}>
+                                    <em>{reaction.emoji}</em>
+                                    {reaction.count}
+                                  </span>
+                                )
+                              })
+                            }
+                          </div>
+                        </Link>
+                      </SwiperSlide>
+                    )
+                  })
+                }
+              </Swiper>
+              <div className={styles.control}>
+                <button ref={prevRef02} className={styles.prevBtn}>
+                  <span className="blind">이전버튼</span>
+                </button>
+                <button ref={nextRef02} className={styles.nextBtn}>
+                  <span className="blind">다음버튼</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </Container>
+      </Main>
+    </>
   )
 
 }
