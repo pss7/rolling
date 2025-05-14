@@ -72,7 +72,6 @@
 }
 
 .messageBox {
-  height: 100%;
   padding: 113px 0 100px !important;
   position: relative;
 }
@@ -106,6 +105,7 @@
   background-color: var(--white);
   border-radius: 16px;
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 }
 
 .messageList li .messageTopBox {
@@ -138,7 +138,6 @@
   margin-bottom: 6px;
   display: block;
   font-size: 20px;
-  font-weight: 700;
   color: var(--black);
 }
 
@@ -149,7 +148,7 @@
   font-size: 14px;
 }
 
-.messageList li .textBox .puple {
+.messageList li .textBox .purple {
   background-color: var(--purple100);
   color: var(--purple500);
 }
@@ -191,13 +190,14 @@
 }
 
 .emojiListBox .emoji {
+  width: 100%;
   padding: 8px 12px;
   border-radius: 50px;
   background-color: rgba(0, 0, 0, 0.54);
   color: var(--white);
 }
 
-.emojiListBox .emoj span {
+.emojiListBox .emoji span {
   margin-left: 5px;
 }
 
@@ -215,6 +215,7 @@
 }
 
 .emojiListBox .emojiaddList {
+  width: 284px;
   padding: 20px;
   display: flex;
   flex-wrap: wrap;
@@ -238,7 +239,7 @@
 }
 
 .emojiListBox .emojiaddList .emojiadd {
-  flex-shrink: 0;
+  width: 30%;
 }
 
 .shareBox .shareBtn {
@@ -249,11 +250,43 @@
   color: var(--black);
 }
 
-
-
-
-
 @media (max-width: 1024px) {
+
+  #messageHedaer .layoutBox {
+    height: auto;
+    padding: 20px 0;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 20px 0;
+  }
+
+  #messageHedaer .name {
+    font-weight: 700;
+    font-size: 22px;
+  }
+
+  #messageHedaer .line {
+    margin: 0 18px;
+    height: 20px;
+  }
+
+  #messageHedaer .line:nth-last-of-type(2) {
+    display: none;
+  }
+
+  .emojiListBox .emoji {
+    font-size: 14px;
+  }
+
+  .shareBox .shareBtn {
+    display: none;
+    font-size: 14px;
+  }
+
+  #messageHedaer .messageCountBox span {
+    font-size: 16px;
+    color: var(--gray900);
+  }
 
   .messageBox {
     padding: 80px 0 100px !important;
@@ -266,5 +299,56 @@
   .messageList li {
     width: 49%;
   }
+
+}
+
+@media (max-width: 767px) {
+
+  .messageBox {
+    padding: 50px 0 100px !important;
+  }
+
+  #messageHedaer .name {
+    font-weight: 700;
+    font-size: 18px;
+  }
+
+  .messageList li {
+    padding: 20px 24px;
+    min-height: 0;
+    border-radius: 10px;
+  }
+
+  .messageList li .messageContent {
+    font-size: 16px;
+  }
+
+  .messageList li .textBox .name {
+    font-size: 18px;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+  .messageList li {
+    width: 100%;
+  }
+
+  #messageHedaer .profileImageBox,
+  #messageHedaer .messageCountBox,
+  #messageHedaer .line {
+    display: none;
+  }
+
+  /* #messageHedaer .layoutBox .box {
+    flex-direction: column;
+    gap: 20px 0;
+    align-items: flex-start;
+  }
+
+  #messageHedaer .line {
+    display: none;
+  } */
 
 }

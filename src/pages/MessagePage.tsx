@@ -2,13 +2,26 @@ import { useParams } from "react-router-dom";
 import Container from "../components/layout/Container";
 import Main from "../components/layout/Main";
 import { useEffect, useState } from "react";
-import { getMessage, getReaction, postReaction } from "../api/list";
+import { getMessage, getReaction, getDetail, postReaction } from "../api/list";
 import styles from "./MessagePage.module.css";
 import dayjs from "dayjs";
 import Header from "../components/layout/Header";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Modal from "../components/ui/Modal";
+
 export default function MessagePage() {
+
+  const emoji = [
+    { emoji: "👍", count: 0 },
+    { emoji: "😍", count: 0 },
+    { emoji: "🥴", count: 0 },
+    { emoji: "😅", count: 0 },
+    { emoji: "🥹", count: 0 },
+    { emoji: "🎉", count: 0 },
+    { emoji: "👻", count: 0 },
+    { emoji: "👿", count: 0 },
+  ];
 
   interface Recipient {
     id: string;
@@ -31,16 +44,37 @@ export default function MessagePage() {
     }[];
   }
 
+  interface Message {
+    id: string;
+    recipientId: string;
+    sender: string;
+    profileImageURL: string;
+    relationship: string;
+    content: string;
+    font: string;
+    createdAt: string;
+  }
+
   interface Reaction {
     emoji: string;
     count: string;
   }
 
   const { id } = useParams<{ id: string }>();
-  const [messageListData, setMessageListData] = useState<Recipient | null>(null);
+  const [messageListData, setMessageListData] = useState<Message[]>([]);
+  const [detailListData, setDetailListData] = useState<Recipient | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
   const [emojiData, setEmojiData] = useState<Reaction[]>([]);
-  const [isOpen, setIsOpen] = useState<Boolean>(false);
-  console.log(messageListData);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const mergedEmoji = emoji.map(e => {
+    const match = emojiData.find(d => d.emoji === e.emoji);
+    return {
+      emoji: e.emoji,
+      count: match ? Number(match.count) : 0,
+    };
+  });
 
   useEffect(() => {
 
@@ -51,7 +85,7 @@ export default function MessagePage() {
       try {
         const response = await getMessage(id);
         if (response) {
-          setMessageListData(response);
+          setMessageListData(response.results);
         }
       } catch (error) {
         console.error("롤링페이퍼 대상 불러오기 실패:", error);
@@ -59,6 +93,26 @@ export default function MessagePage() {
     }
 
     fetchMessage()
+
+  }, [id])
+
+  useEffect(() => {
+
+    async function fetchListDetail() {
+
+      if (!id) return;
+
+      try {
+        const response = await getDetail(id);
+        if (response) {
+          setDetailListData(response);
+        }
+      } catch (error) {
+        console.error("롤링페이퍼 대상 불러오기 실패:", error);
+      }
+    }
+
+    fetchListDetail()
 
   }, [id])
 
@@ -84,7 +138,7 @@ export default function MessagePage() {
   async function submitReaction(emoji: string) {
 
     if (!id) return;
-    
+
     try {
       const payload: { emoji: string; type: "increase" | "decrease" } = {
         emoji: emoji,
@@ -119,6 +173,13 @@ export default function MessagePage() {
 
   }
 
+  function handleModal(message: Message) {
+
+    setSelectedMessage(message);
+    setIsModalOpen(true);
+
+  }
+
   return (
     <>
       <Header />
@@ -126,21 +187,21 @@ export default function MessagePage() {
         <Container>
           <div className={styles.layoutBox}>
             <div className={styles.name}>
-              To.{messageListData?.name}
+              To.{detailListData?.name}
             </div>
 
             <div className={styles.box}>
               <div className={styles.profileImageBox}>
                 {
-                  messageListData?.recentMessages && messageListData.recentMessages.length > 0 ? (
+                  detailListData?.recentMessages && detailListData.recentMessages.length > 0 ? (
                     <>
-                      {messageListData.recentMessages.slice(0, 3).map((data, index) => (
+                      {detailListData.recentMessages.slice(0, 3).map((data, index) => (
                         <div key={index} className={styles.profileImage}>
                           <img src={data.profileImageURL} alt="프로필이미지" />
                         </div>
                       ))}
                       <div className={styles.defaultImage}>
-                        +{messageListData.messageCount >= 3 ? messageListData.messageCount - 3 : 0}
+                        +{detailListData.messageCount >= 3 ? detailListData.messageCount - 3 : 0}
                       </div>
                     </>
                   ) : (
@@ -157,7 +218,7 @@ export default function MessagePage() {
               </div>
               <div className={styles.messageCountBox}>
                 <span>
-                  <strong>{messageListData?.messageCount}</strong>명이 작성했어요!
+                  <strong>{detailListData?.messageCount}</strong>명이 작성했어요!
                 </span>
               </div>
               <div className={styles.line}></div>
@@ -186,7 +247,7 @@ export default function MessagePage() {
                   className={`${styles.emojiaddList} ${isOpen ? `${styles.active}` : ""}`}
                 >
                   {
-                    emojiData?.map((data, index) => {
+                    mergedEmoji.map((data, index) => {
                       return (
                         <div className={styles.emojiadd} key={index}>
                           <button
@@ -194,12 +255,10 @@ export default function MessagePage() {
                             onClick={() => submitReaction(data.emoji)}
                           >
                             {data.emoji}
-                            <span>
-                              {data.count}
-                            </span>
+                            <span>{data.count}</span>
                           </button>
                         </div>
-                      )
+                      );
                     })
                   }
                 </div>
@@ -221,23 +280,23 @@ export default function MessagePage() {
       <Main
         id="sub"
         className={
-          messageListData?.backgroundImageURL
+          detailListData?.backgroundImageURL
             ? `${styles.messageBox} ${styles.backgroundImage}`
-            : `${styles.messageBox} ${messageListData?.backgroundColor === "beige"
+            : `${styles.messageBox} ${detailListData?.backgroundColor === "beige"
               ? styles.beige
-              : messageListData?.backgroundColor === "purple"
+              : detailListData?.backgroundColor === "purple"
                 ? styles.purple
-                : messageListData?.backgroundColor === "blue"
+                : detailListData?.backgroundColor === "blue"
                   ? styles.blue
-                  : messageListData?.backgroundColor === "green"
+                  : detailListData?.backgroundColor === "green"
                     ? styles.green
                     : ""
             }`
         }
         style={
-          messageListData?.backgroundImageURL
+          detailListData?.backgroundImageURL
             ? {
-              background: `url(${messageListData?.backgroundImageURL}) no-repeat center`,
+              background: `url(${detailListData?.backgroundImageURL}) no-repeat center`,
               backgroundSize: "cover",
             }
             : {}
@@ -247,22 +306,24 @@ export default function MessagePage() {
           <ul className={styles.messageList}>
 
             {
-              messageListData?.recentMessages.map((data, index) => {
+              messageListData?.map((data, index) => {
                 return (
-                  <li key={index}>
+                  <li
+                    key={index}
+                    onClick={() => handleModal(data)}>
                     <div className={styles.messageTopBox}>
                       <div className={styles.imgBox}>
                         <img src={`${data.profileImageURL}`} alt="프로필이미지" />
                       </div>
                       <div className={styles.textBox}>
                         <span className={styles.name}>
-                          From. {data.sender}
+                          From. <strong>{data.sender}</strong>
                         </span>
                         <span
                           className={
                             `
                          ${styles.relationship} 
-                         ${data.relationship === "동료" ? `${styles.puple}` : ""}
+                         ${data.relationship === "동료" ? `${styles.purple}` : ""}
                          ${data.relationship === "가족" ? `${styles.green}` : ""}
                          ${data.relationship === "친구" ? `${styles.blue}` : ""}
                          ${data.relationship === "지인" ? `${styles.beige}` : ""}
@@ -273,7 +334,10 @@ export default function MessagePage() {
                         </span>
                       </div>
                     </div>
-                    <p className={styles.messageContent}>
+                    <p
+                      className={styles.messageContent}
+                      style={{ fontFamily: `${data.font}` }}
+                    >
                       {data.content}
                     </p>
                     <span className={styles.date}>
@@ -296,6 +360,15 @@ export default function MessagePage() {
             }}
           />
         </Container>
+
+        {
+          isModalOpen && selectedMessage &&
+          <Modal
+            message={selectedMessage}
+            onClose={() => setIsModalOpen(false)}
+          />
+        }
+
       </Main>
     </>
   )
