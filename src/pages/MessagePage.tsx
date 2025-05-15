@@ -9,6 +9,7 @@ import Header from "../components/layout/Header";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Modal from "../components/ui/Modal";
+import Button from "../components/ui/Button";
 
 export default function MessagePage() {
 
@@ -349,6 +350,13 @@ export default function MessagePage() {
               })
             }
           </ul>
+          <div className={styles.btnBox}>
+            <Button
+              text="삭제하기"
+              className={styles.deleteBtn}
+              variant="primary">
+            </Button>
+          </div>
           <ToastContainer
             position="top-center"
             autoClose={3000}
@@ -370,7 +378,7 @@ export default function MessagePage() {
           />
         }
 
-      </Main>
+      </Main >
     </>
   )
 

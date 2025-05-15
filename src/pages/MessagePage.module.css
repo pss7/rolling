@@ -5,6 +5,7 @@
   right: 0;
   background-color: var(--white);
   z-index: 99;
+  border-bottom: 1px solid var(--gray200);
 }
 
 #messageHeader .layoutBox {
@@ -12,7 +13,6 @@
   justify-content: space-between;
   align-items: center;
   height: 68px;
-  border-bottom: 1px solid var(--gray200);
 }
 
 #messageHeader .layoutBox .box {
@@ -81,7 +81,7 @@
 }
 
 .messageBox {
-  padding: 245px 0 100px !important;
+  padding: 260px 0 100px !important;
   min-height: 100%;
   position: relative;
 }
@@ -271,6 +271,20 @@
   color: var(--black);
 }
 
+.btnBox {
+  margin-top: 50px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btnBox .deleteBtn {
+  width: 92px;
+  height: 39px;
+  font-size: 16px;
+  font-weight: 400;
+  border-radius: 6px;
+}
+
 @media (max-width: 1024px) {
 
   #messageHeader .layoutBox {
@@ -279,6 +293,10 @@
     align-items: flex-start;
     flex-direction: column;
     gap: 20px 0;
+  }
+
+  .emojiListBox .emojiaddList {
+    top: 58px;
   }
 
   #messageHeader .name {
@@ -346,6 +364,7 @@
   .messageList li .textBox .name {
     font-size: 18px;
   }
+
 
 }
 
