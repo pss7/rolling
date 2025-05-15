@@ -8,7 +8,7 @@ export async function getList(count?: number | null) {
     return response.data;
   } catch (error) {
     console.error("롤링페이퍼 대상 목록 불러오기 실패:", error);
-    throw error; 
+    throw error;
   }
 }
 
@@ -19,26 +19,36 @@ export async function getDetail(id: string) {
     return response.data;
   } catch (error) {
     console.error("롤링페이퍼 대상 불러오기 실패:", error);
-    throw error; 
+    throw error;
   }
 }
 
 //롤링페이퍼 대상 메세지 조회
-export async function getMessage(id:string){
-  try{
-    const response = await axios.get(`${BASE_URL}/12-4/recipients/${id}/messages/`)
+export async function getMessage(id: string) {
+  try {
+    const response = await axios.get(`${BASE_URL}/12-4/recipients/${id}/messages/`);
     return response.data;
-  }catch(error){
+  } catch (error) {
     console.error("롤링페이퍼 메세지 불러오기 실패:", error);
   }
 }
 
+//롤링페이퍼 삭제
+export async function deleteRecipient(id: string) {
+  try {
+    const response = await axios.delete(`${BASE_URL}/12-4/recipients/${id}/`);
+    return response;
+  } catch (error) {
+    console.error("롤링페이서 삭제 실패:", error);
+  }
+}
+
 //리액션 조회
-export async function getReaction(id:string){
-  try{
-    const response = await axios.get(`${BASE_URL}/12-4/recipients/${id}/reactions/`)
+export async function getReaction(id: string) {
+  try {
+    const response = await axios.get(`${BASE_URL}/12-4/recipients/${id}/reactions/`);
     return response.data;
-  }catch(error){
+  } catch (error) {
     console.error("대상에게 단 리액션 불러오기 실패:", error);
   }
 }
@@ -55,3 +65,4 @@ export async function postReaction(
     console.error("이모지 보내기 실패:", error);
   }
 }
+

@@ -138,7 +138,7 @@ export default function ListPage() {
                         >
                           <div className={styles.textBox}>
                             <h3>
-                              {data.name}
+                              To.{data.name}
                             </h3>
                             <div className={styles.profileImageBox}>
                               {
@@ -158,14 +158,9 @@ export default function ListPage() {
                                     </div>
                                   </>
                                 ) : (
-                                  <>
-                                    <div className={styles.defaultImage}>
-                                      <span className="blind">기본이미지</span>
-                                    </div>
-                                    <div className={styles.defaultImage}>
-                                      +{data.messageCount >= 3 ? Number(data.messageCount - 3) : 0}
-                                    </div>
-                                  </>
+                                  <div className={styles.defaultImage}>
+                                    +{data.messageCount >= 3 ? Number(data.messageCount - 3) : 0}
+                                  </div>
                                 )
                               }
                             </div>
@@ -271,14 +266,9 @@ export default function ListPage() {
                                     </div>
                                   </>
                                 ) : (
-                                  <>
-                                    <div className={styles.defaultImage}>
-                                      <span className="blind">기본이미지</span>
-                                    </div>
-                                    <div className={styles.defaultImage}>
-                                      +0
-                                    </div>
-                                  </>
+                                  <div className={styles.defaultImage}>
+                                    +0
+                                  </div>
                                 )
                               }
                             </div>

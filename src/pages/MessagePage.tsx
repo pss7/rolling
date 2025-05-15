@@ -1,8 +1,8 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Container from "../components/layout/Container";
 import Main from "../components/layout/Main";
 import { useEffect, useState } from "react";
-import { getMessage, getReaction, getDetail, postReaction } from "../api/list";
+import { getMessage, getReaction, getDetail, postReaction, deleteRecipient } from "../api/list";
 import styles from "./MessagePage.module.css";
 import dayjs from "dayjs";
 import Header from "../components/layout/Header";
@@ -62,6 +62,7 @@ export default function MessagePage() {
   }
 
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const [messageListData, setMessageListData] = useState<Message[]>([]);
   const [detailListData, setDetailListData] = useState<Recipient | null>(null);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -179,6 +180,17 @@ export default function MessagePage() {
     setSelectedMessage(message);
     setIsModalOpen(true);
 
+  }
+
+  async function handleDeleteRecipient() {
+    if (!id) return;
+    try {
+      await deleteRecipient(id);
+      toast.success("삭제가 완료되었습니다.");
+      navigate("/list");
+    } catch (error) {
+      toast.error("삭제 중 오류가 발생했습니다.");
+    }
   }
 
   return (
@@ -354,7 +366,9 @@ export default function MessagePage() {
             <Button
               text="삭제하기"
               className={styles.deleteBtn}
-              variant="primary">
+              variant="primary"
+              onClick={handleDeleteRecipient}
+            >
             </Button>
           </div>
           <ToastContainer
