@@ -22,14 +22,14 @@ export default function MainPage() {
             로그인 없이 자유롭게 만들어요.
           </p>
         </div>
-        {/* <div className={styles.imgBox}>
-          <img src="/assets/images/main/point_img01.png" alt="" />
-        </div> */}
+        <div className={styles.imgBox}>
+          <img src="/assets/images/main/point_img01.svg" alt="ponint01" />
+        </div>
       </div>
       <div className={`${styles.mainBox} ${styles.mainBox02}`}>
-        {/* <div className={styles.imgBox}>
-          <img src="/assets/images/main/point_img02.png" alt="" />
-        </div> */}
+        <div className={styles.imgBox}>
+          <img src="/assets/images/main/point_img02.png" alt="ponint02" />
+        </div>
         <div className={styles.textBox}>
           <span className={styles.point}>
             Point.02

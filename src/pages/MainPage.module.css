@@ -27,7 +27,7 @@
 
 .mainBox .imgBox img {
   display: block;
-  max-width: 100%;
+  width: 100%;
 }
 
 .mainBox .textBox {
@@ -143,11 +143,6 @@
 
   .mainBox01 .imgBox {
     justify-content: center;
-  }
-
-  .mainBox01 .imgBox img {
-    max-width: none;
-    width: 500px;
   }
 
 }
