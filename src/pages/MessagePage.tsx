@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Container from "../components/layout/Container";
 import Main from "../components/layout/Main";
 import { useEffect, useState } from "react";
@@ -183,7 +183,7 @@ export default function MessagePage() {
   return (
     <>
       <Header />
-      <header id={styles.messageHedaer}>
+      <div id={styles.messageHeader}>
         <Container>
           <div className={styles.layoutBox}>
             <div className={styles.name}>
@@ -205,14 +205,9 @@ export default function MessagePage() {
                       </div>
                     </>
                   ) : (
-                    <>
-                      <div className={styles.defaultImage}>
-                        <span className="blind">기본이미지</span>
-                      </div>
-                      <div className={styles.defaultImage}>
-                        +0
-                      </div>
-                    </>
+                    <div className={styles.defaultImage}>
+                      +0
+                    </div>
                   )
                 }
               </div>
@@ -224,7 +219,7 @@ export default function MessagePage() {
               <div className={styles.line}></div>
               <div className={styles.emojiListBox}>
                 {
-                  emojiData?.slice(0, 3).map((data, index) => {
+                  mergedEmoji.slice(0, 3).map((data, index) => {
                     return (
                       <div className={styles.emojiList} key={index}>
                         <div className={styles.emoji}>
@@ -276,7 +271,7 @@ export default function MessagePage() {
 
           </div>
         </Container>
-      </header>
+      </div>
       <Main
         id="sub"
         className={
@@ -304,7 +299,13 @@ export default function MessagePage() {
       >
         <Container>
           <ul className={styles.messageList}>
-
+            <li className={styles.link}>
+              <Link to="#">
+                <span className="blind">
+                  롤링페이퍼 작성 페이지로 이동
+                </span>
+              </Link>
+            </li>
             {
               messageListData?.map((data, index) => {
                 return (

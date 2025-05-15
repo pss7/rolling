@@ -69,12 +69,11 @@
 }
 
 #main {
-  padding: 60px 0;
+  padding: 124px 0 60px;
 }
 
 #sub {
-  padding: 50px 0 100px;
-  min-height: 600px;
+  padding: 114px 0 100px;
 }
 
 .Toastify__close-button {
@@ -85,7 +84,7 @@
 @media (max-width: 576px) {
 
   #main {
-    padding: 50px 0 60px;
+    padding: 110px 0 60px;
   }
-  
+
 }
