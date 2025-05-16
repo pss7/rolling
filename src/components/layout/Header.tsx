@@ -15,7 +15,7 @@ export default function Header() {
               </Link>
             </h1>
           </div>
-          <Link to="/" className={styles.rollingAddLink}>
+          <Link to="/create" className={styles.rollingAddLink}>
             롤링 페이퍼 만들기
           </Link>
         </div>

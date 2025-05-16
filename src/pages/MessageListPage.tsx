@@ -3,15 +3,16 @@ import Container from "../components/layout/Container";
 import Main from "../components/layout/Main";
 import { useEffect, useState } from "react";
 import { getMessage, getReaction, getDetail, postReaction, deleteRecipient } from "../api/list";
-import styles from "./MessagePage.module.css";
+import styles from "./MessageListPage.module.css";
 import dayjs from "dayjs";
 import Header from "../components/layout/Header";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Modal from "../components/ui/Modal";
+import MessageModal from "../components/ui/MessageModal";
 import Button from "../components/ui/Button";
+import DeleteConfirmModal from "../components/ui/DeleteConfirmModal";
 
-export default function MessagePage() {
+export default function MessageListPage() {
 
   const emoji = [
     { emoji: "👍", count: 0 },
@@ -65,10 +66,12 @@ export default function MessagePage() {
   const navigate = useNavigate();
   const [messageListData, setMessageListData] = useState<Message[]>([]);
   const [detailListData, setDetailListData] = useState<Recipient | null>(null);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [selectedMessage, setSelectedMessage] = useState<Message | null>(null);
   const [emojiData, setEmojiData] = useState<Reaction[]>([]);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [isMessageModalOpen, setIsMessageModalOpen] = useState<boolean>(false);
+  const [isEmojiOpen, setIsEmojiOpen] = useState<boolean>(false);
 
   const mergedEmoji = emoji.map(e => {
     const match = emojiData.find(d => d.emoji === e.emoji);
@@ -156,10 +159,10 @@ export default function MessagePage() {
 
   function handleToggle() {
 
-    if (isOpen) {
-      setIsOpen(false);
+    if (isEmojiOpen) {
+      setIsEmojiOpen(false);
     } else {
-      setIsOpen(true);
+      setIsEmojiOpen(true);
     }
 
   }
@@ -178,7 +181,7 @@ export default function MessagePage() {
   function handleModal(message: Message) {
 
     setSelectedMessage(message);
-    setIsModalOpen(true);
+    setIsMessageModalOpen(true);
 
   }
 
@@ -246,13 +249,13 @@ export default function MessagePage() {
                   })
                 }
                 <button
-                  className={`${styles.emojiToggleBtn} ${isOpen ? `${styles.active}` : ""}`}
+                  className={`${styles.emojiToggleBtn} ${isEmojiOpen ? `${styles.active}` : ""}`}
                   onClick={handleToggle}
                 >
                   <span className="blind">이모지추가 버튼</span>
                 </button>
                 <div
-                  className={`${styles.emojiaddList} ${isOpen ? `${styles.active}` : ""}`}
+                  className={`${styles.emojiaddList} ${isEmojiOpen ? `${styles.active}` : ""}`}
                 >
                   {
                     mergedEmoji.map((data, index) => {
@@ -367,7 +370,7 @@ export default function MessagePage() {
               text="삭제하기"
               className={styles.deleteBtn}
               variant="primary"
-              onClick={handleDeleteRecipient}
+              onClick={() => setShowDeleteModal(true)}
             >
             </Button>
           </div>
@@ -384,13 +387,17 @@ export default function MessagePage() {
           />
         </Container>
 
-        {
-          isModalOpen && selectedMessage &&
-          <Modal
-            message={selectedMessage}
-            onClose={() => setIsModalOpen(false)}
-          />
-        }
+        <MessageModal
+          isActive={isMessageModalOpen}
+          message={selectedMessage}
+          onClose={() => setIsMessageModalOpen(false)}
+        />
+
+        <DeleteConfirmModal
+          isActive={showDeleteModal}
+          onDelete={handleDeleteRecipient}
+          onCancel={() => setShowDeleteModal(false)}
+        />
 
       </Main >
     </>

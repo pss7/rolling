@@ -118,7 +118,7 @@ export default function ListPage() {
                         key={index}
                         className={styles.slide}
                       >
-                        <Link to={`/message/${data.id}`}
+                        <Link to={`/message-list/${data.id}`}
                           className={
                             data.backgroundImageURL
                               ? styles.backgroundImage
@@ -226,7 +226,7 @@ export default function ListPage() {
                         key={index}
                         className={styles.slide}
                       >
-                        <Link to={`/message/${data.id}`}
+                        <Link to={`/message-list/${data.id}`}
                           className={
                             data.backgroundImageURL
                               ? styles.backgroundImage

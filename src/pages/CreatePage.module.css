@@ -1,0 +1,135 @@
+.box {
+  margin-bottom: 50px;
+}
+
+.container {
+  max-width: 760px;
+}
+
+.title {
+  margin-bottom: 12px;
+  font-size: 24px;
+  color: var(--gray900);
+}
+
+.box02 .title {
+  margin-bottom: 5px;
+}
+
+.box02 .text {
+  margin-bottom: 24px;
+}
+
+.text {
+  color: var(--gray500);
+}
+
+.selectBtnBox {
+  margin-bottom: 45px;
+  display: flex;
+}
+
+.selectBtnBox .selectButton {
+  width: 122px;
+  height: 40px;
+  border-radius: 6px;
+  background-color: var(--gray100);
+  color: var(--gray900);
+}
+
+.selectBtnBox .selectButton.active {
+  border: 2px solid var(--purple600);
+  background-color: var(--white);
+  color: var(--purple700);
+  font-weight: 500;
+}
+
+.backgroundList {
+  margin-bottom: 70px;
+  display: flex;
+  gap: 0 16px;
+}
+
+.backgroundList .selectButton {
+  position: relative;
+  width: 168px;
+  height: 168px;
+  border-radius: 16px;
+}
+
+.backgroundList .selectButton.active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  background: url(/public/assets/images/sub/select_icon.svg)no-repeat center;
+}
+
+.backgroundList .colorButton {
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.backgroundList .beige {
+  background-color: var(--beige200);
+}
+
+.backgroundList .purple {
+  background-color: var(--purple200);
+}
+
+.backgroundList .blue {
+  background-color: var(--blue200);
+}
+
+.backgroundList .green {
+  background-color: var(--green200);
+}
+
+@media (max-width: 767px) {
+
+  .backgroundList {
+    flex-wrap: wrap;
+    gap: 15px 2%;
+  }
+
+  .backgroundList .selectButton {
+    width: 49%;
+    border-radius: 5px;
+  }
+
+}
+
+@media (max-width: 576px) {
+
+  .backgroundList {
+    gap: 10px 2%;
+  }
+
+}
+
+@media (max-width: 414px) {
+
+  .backgroundList {
+    gap: 8px 2%;
+  }
+
+  .backgroundList .selectButton {
+    height: 156px;
+  }
+
+}
+
+@media (max-width: 320px) {
+
+  .backgroundList {
+    gap: 5px 2%;
+  }
+
+  .backgroundList .selectButton {
+    height: 140px;
+  }
+
+}

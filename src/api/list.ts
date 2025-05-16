@@ -66,3 +66,15 @@ export async function postReaction(
   }
 }
 
+//배경이미지 
+export async function getImage() {
+
+  try {
+    const response = await axios.get(`${BASE_URL}/background-images/`)
+    return response.data;
+  } catch (error) {
+    console.error("이미지 불러오기 실패:", error);
+  }
+
+}
+
