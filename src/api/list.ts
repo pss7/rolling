@@ -33,6 +33,20 @@ export async function getMessage(id: string) {
   }
 }
 
+//롤링페이퍼 대상 생성
+export async function postRecipient(recipientData: {
+  name: string;
+  backgroundColor?: string;
+  backgroundImageURL?: string;
+}) {
+  try {
+    const response = await axios.post(`${BASE_URL}/12-4/recipients/`, recipientData);
+    return response.data;
+  } catch (error) {
+    console.error("롤링페이퍼 대상 생성 실패:", error);
+  }
+}
+
 //롤링페이퍼 삭제
 export async function deleteRecipient(id: string) {
   try {

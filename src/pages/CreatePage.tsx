@@ -4,10 +4,13 @@ import Header from "../components/layout/Header";
 import Main from "../components/layout/Main";
 import Input from "../components/ui/Input";
 import styles from "./createPage.module.css";
-import { getImage } from "../api/list";
+import { getImage, postRecipient } from "../api/list";
 import Button from "../components/ui/Button";
+import { useNavigate } from "react-router-dom";
 
 export default function CreatePage() {
+
+  const navigate = useNavigate();
 
   const backgroundColor = ["beige", "purple", "blue", "green"];
   const [image, setImage] = useState<string[]>([]);
@@ -44,13 +47,47 @@ export default function CreatePage() {
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     setReceiverName(e.target.value);
-    setErrorMessage(""); // 입력 중에는 에러 제거
+    setErrorMessage("");
   }
 
   function handleBlur() {
     if (receiverName.trim() === "") {
       setErrorMessage("값을 입력해 주세요.");
     }
+  }
+
+  async function handleCreateRecipient() {
+
+    if (receiverName.trim() === "") {
+      setErrorMessage("값을 입력해 주세요.");
+      return;
+    }
+
+    if (!selectBackground?.value) {
+      alert("배경을 선택해 주세요.");
+      return;
+    }
+
+    const recipientData =
+      selectBackground.type === "color"
+        ? {
+          name: receiverName,
+          backgroundColor: selectBackground.value,
+        }
+        : {
+          name: receiverName,
+          backgroundColor: backgroundColor[0],    
+          backgroundImageURL: selectBackground.value,
+        };
+
+    try {
+      const response = await postRecipient(recipientData)
+      console.log("롤링페이퍼 대상 생성 완료:", response);
+      navigate("/list");
+    } catch (error) {
+      console.error("롤링페이퍼 대상 생성 실패:", error);
+    }
+
   }
 
   return (
@@ -61,6 +98,7 @@ export default function CreatePage() {
           <div className={styles.box}>
             <h2 className={styles.title}>To.</h2>
             <Input
+              value={receiverName}
               placeholder="받는 사람 이름을 입력해 주세요"
               onChange={handleChange}
               onBlur={handleBlur}
@@ -143,6 +181,8 @@ export default function CreatePage() {
           </div>
           <Button
             text="생성하기"
+            onClick={handleCreateRecipient}
+            disabled={receiverName.trim() === ""}
           />
         </Container>
       </Main>

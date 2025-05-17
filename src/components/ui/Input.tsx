@@ -6,12 +6,13 @@ interface InputProps {
   disabled?: boolean;
   error?: string;
   id?: string
+  value?: string;
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   onBlur?: React.FocusEventHandler<HTMLInputElement>;
 
 }
 
-export default function Input({ id, placeholder, disabled, error, onChange, onBlur }: InputProps) {
+export default function Input({ id, placeholder, disabled, error, value, onChange, onBlur }: InputProps) {
 
   return (
     <>
@@ -20,6 +21,7 @@ export default function Input({ id, placeholder, disabled, error, onChange, onBl
         className={`${style.input} ${error ? "error" : ""}`}
         placeholder={placeholder}
         disabled={disabled}
+        value={value}
         onChange={onChange}
         onBlur={onBlur}
       />
