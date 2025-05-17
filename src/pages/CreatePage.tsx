@@ -3,7 +3,7 @@ import Container from "../components/layout/Container";
 import Header from "../components/layout/Header";
 import Main from "../components/layout/Main";
 import Input from "../components/ui/Input";
-import styles from "./createPage.module.css";
+import styles from "./CreatePage.module.css";
 import { getImage, postRecipient } from "../api/list";
 import Button from "../components/ui/Button";
 import { useNavigate } from "react-router-dom";
