@@ -3,7 +3,7 @@ import Component from './pages/test/Component';
 import Home from './pages/test/Home';
 import ListPage from './pages/ListPage';
 import MessageListPage from './pages/MessageListPage';
-import CreatePage from './pages/createPage';
+import CreatePage from './pages/CreatePage';
 
 function App() {
   return (
