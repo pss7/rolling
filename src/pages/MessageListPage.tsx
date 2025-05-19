@@ -81,6 +81,10 @@ export default function MessageListPage() {
     };
   });
 
+  const topThreeEmoji = [...mergedEmoji]
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 3);
+
   useEffect(() => {
 
     async function fetchMessage() {
@@ -235,7 +239,7 @@ export default function MessageListPage() {
               <div className={styles.line}></div>
               <div className={styles.emojiListBox}>
                 {
-                  mergedEmoji.slice(0, 3).map((data, index) => {
+                  topThreeEmoji.map((data, index) => {
                     return (
                       <div className={styles.emojiList} key={index}>
                         <div className={styles.emoji}>

@@ -92,3 +92,15 @@ export async function getImage() {
 
 }
 
+//프로필이미지
+export async function getProfilimage() {
+
+  try {
+    const response = await axios.get(`${BASE_URL}/profile-images/`)
+    return response.data;
+  } catch (error) {
+    console.error("프로필이미지 불러오기 실패:", error);
+  }
+
+}
+

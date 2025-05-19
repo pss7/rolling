@@ -88,7 +88,59 @@
   background-color: var(--green200);
 }
 
+.profileImgBox {
+  display: flex;
+  align-items: center;
+  gap: 0 32px;
+}
+
+.profileImgBox .selectImgBox {
+  width: 80px;
+  height: 80px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.profileImgBox .selectImgBox img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profileImgBox .profileSelectBox .selectImgList {
+  display: flex;
+  gap: 0 4px;
+}
+
+.profileImgBox p {
+  margin-bottom: 12px;
+  color: var(--gray500);
+}
+
+.profileImgBox .profileSelectBox .selectImgList .selectButton {
+  width: 56px;
+  height: 56px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+
+.profileImgBox .profileSelectBox .selectImgList .selectButton img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 @media (max-width: 767px) {
+
+  .title {
+    font-size: 20px;
+  }
+
+  .selectBtnBox {
+    margin-bottom: 35px;
+  }
 
   .backgroundList {
     flex-wrap: wrap;

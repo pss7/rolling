@@ -63,21 +63,16 @@ export default function CreatePage() {
       return;
     }
 
-    if (!selectBackground?.value) {
-      alert("배경을 선택해 주세요.");
-      return;
-    }
-
     const recipientData =
-      selectBackground.type === "color"
+      selectBackground?.type === "color"
         ? {
           name: receiverName,
           backgroundColor: selectBackground.value,
         }
         : {
           name: receiverName,
-          backgroundColor: backgroundColor[0],    
-          backgroundImageURL: selectBackground.value,
+          backgroundColor: backgroundColor[0],
+          backgroundImageURL: selectBackground?.value,
         };
 
     try {
