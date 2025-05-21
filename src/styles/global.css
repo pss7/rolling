@@ -55,6 +55,7 @@
 :disabled {
   background-color: var(--gray100);
   color: var(--gray400);
+  pointer-events: none;
 }
 
 .error {

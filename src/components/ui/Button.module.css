@@ -10,7 +10,6 @@
 .primary:disabled {
   background-color: var(--gray300);
   color: var(--white);
-  pointer-events: none;
 }
 
 .primary {

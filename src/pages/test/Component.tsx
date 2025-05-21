@@ -32,19 +32,19 @@ export default function Component() {
       </h1>
       <div className={styles.box}>
         <Dropdown
-          label="선택"
+          value="선택"
           option={["옵션1", "옵션2", "옵션3"]}
         />
       </div>
       <div className={styles.box}>
         <Dropdown
-          label="선택"
+          value="선택"
           disabled
         />
       </div>
       <div className={styles.box}>
         <Dropdown
-          label="선택"
+          value="선택"
           error="Error Message"
           option={["옵션1", "옵션2", "옵션3"]}
         />
