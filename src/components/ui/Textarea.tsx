@@ -14,7 +14,6 @@ export default function Textarea({ onChange, onBlur, error }: TextareaProps) {
 
   return (
     <>
-      <label htmlFor="content" className="blind">내용입력</label>
       <textarea
         id="content"
         name="content"
