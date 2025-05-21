@@ -1,4 +1,4 @@
-import style from "./Input.module.css";
+import styles from "./Input.module.css";
 
 interface InputProps {
 
@@ -18,7 +18,7 @@ export default function Input({ id, placeholder, disabled, error, value, onChang
     <>
       <input
         id={id}
-        className={`${style.input} ${error ? "error" : ""}`}
+        className={`${styles.input} ${error ? "error" : ""}`}
         placeholder={placeholder}
         disabled={disabled}
         value={value}

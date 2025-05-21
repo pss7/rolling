@@ -43,7 +43,7 @@
   visibility: hidden;
   transition: all .5s;
   overflow: hidden;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
 }
 
 .optionList.active {
@@ -70,6 +70,7 @@
     padding-left: 10px;
     height: 40px;
     font-size: 14px;
+    border-radius: 5px
   }
 
   .optionList {

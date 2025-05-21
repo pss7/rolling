@@ -3,14 +3,14 @@ import styles from "./Dropdown.module.css"
 
 interface DropdownProps {
 
-  label: string;
+  label?: string;
   disabled?: boolean;
   error?: string;
   option?: string[];
-
+  className?: string;
 }
 
-export default function Dropdown({ label, disabled, error, option = [] }: DropdownProps) {
+export default function Dropdown({ className, label, disabled, error, option = [] }: DropdownProps) {
 
   const [isOpen, setIsOpen] = useState(false);
   const [selectedValue, setSelectedValue] = useState(label);
@@ -34,7 +34,7 @@ export default function Dropdown({ label, disabled, error, option = [] }: Dropdo
 
   return (
     <>
-      <div className={styles.dropdownBox}>
+      <div className={`${styles.dropdownBox} ${className ? className : ""}`}>
         <button
           className={`${styles.selectBtn} ${error ? "error" : ""} ${isOpen ? `${styles.active}` : ""}`}
           disabled={disabled}

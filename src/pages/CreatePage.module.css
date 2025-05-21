@@ -90,11 +90,13 @@
 
 .profileImgBox {
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  padding-top: 15px;
   gap: 0 32px;
 }
 
 .profileImgBox .selectImgBox {
+  flex-shrink: 0;
   width: 80px;
   height: 80px;
   border-radius: 50px;
@@ -110,7 +112,8 @@
 
 .profileImgBox .profileSelectBox .selectImgList {
   display: flex;
-  gap: 0 4px;
+  flex-wrap: wrap;
+  gap: 8px 4px;
 }
 
 .profileImgBox p {
@@ -150,6 +153,14 @@
   .backgroundList .selectButton {
     width: 49%;
     border-radius: 5px;
+  }
+
+  .profileImgBox {
+    flex-direction: column;
+  }
+
+  .profileImgBox .selectImgBox {
+    margin-bottom: 15px;
   }
 
 }

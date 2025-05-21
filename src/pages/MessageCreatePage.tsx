@@ -5,6 +5,9 @@ import Main from "../components/layout/Main";
 import Input from "../components/ui/Input";
 import styles from "./CreatePage.module.css";
 import { getProfilimage } from "../api/list";
+import Dropdown from "../components/ui/Dropdown";
+import Textarea from "../components/ui/Textarea";
+import Button from "../components/ui/Button";
 
 export default function MessageCreatePage() {
 
@@ -12,8 +15,16 @@ export default function MessageCreatePage() {
     imageUrls: string;
   }
 
+  const relationship = ["친구", "지인", "동료", "가족"]
+  const font = ["Noto Sans", "Pretendard", "나눔명조", "나눔손글씨 손편지체"]
   const [profilImageData, getProfileImageData] = useState<ProfileImage[]>([]);
   const [selecteImage, setSelecteImage] = useState<string | null>(null);
+
+  const [name, setName] = useState("")
+  const [content, setContent] = useState("");
+  
+  const [errorNameMessage, setErrorNameMessage] = useState("");
+  const [errorContentMessage, setErrorContentMessage] = useState("");
 
   console.log(profilImageData);
 
@@ -40,6 +51,28 @@ export default function MessageCreatePage() {
     setSelecteImage(data);
   }
 
+  function handleName(e: React.ChangeEvent<HTMLInputElement>) {
+    setName(e.target.value);
+    setErrorNameMessage("");
+  }
+
+  function handleNameBlur() {
+    if (name.trim() === "") {
+      setErrorNameMessage("이름을 입력해 주세요.");
+    }
+  }
+
+  function handleContent(e: React.ChangeEvent<HTMLTextAreaElement>) {
+    setContent(e.target.value);
+    setErrorContentMessage("");
+  }
+
+  function handleContentBlur() {
+    if (content.trim() === "") {
+      setErrorContentMessage("내용을 입력해 주세요.");
+    }
+  }
+
   return (
     <>
       <Header />
@@ -49,6 +82,9 @@ export default function MessageCreatePage() {
             <h2 className={styles.title}>From.</h2>
             <Input
               placeholder="이름을 입력해 주세요"
+              onChange={handleName}
+              onBlur={handleNameBlur}
+              error={errorNameMessage}
             />
           </div>
           <div className={styles.box}>
@@ -83,7 +119,31 @@ export default function MessageCreatePage() {
           </div>
           <div className={styles.box}>
             <h2 className={styles.title}>상대와의관계</h2>
+            <Dropdown
+              className={styles.dropdownBox}
+              label="선택"
+              option={relationship}
+            />
           </div>
+          <div className={styles.box}>
+            <h2 className={styles.title}>내용을 입력해주세요</h2>
+            <Textarea
+              onChange={handleContent}
+              onBlur={handleContentBlur}
+              error={errorContentMessage}
+            />
+          </div>
+          <div className={styles.box}>
+            <h2 className={styles.title}>폰트 선택</h2>
+            <Dropdown
+              className={styles.dropdownBox}
+              label="선택"
+              option={font}
+            />
+          </div>
+          <Button
+            text="생성하기"
+          />
         </Container>
       </ Main>
     </>
