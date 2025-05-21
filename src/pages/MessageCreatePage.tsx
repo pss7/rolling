@@ -11,22 +11,16 @@ import Button from "../components/ui/Button";
 
 export default function MessageCreatePage() {
 
-  interface ProfileImage {
-    imageUrls: string;
-  }
-
-  const relationship = ["친구", "지인", "동료", "가족"]
-  const font = ["Noto Sans", "Pretendard", "나눔명조", "나눔손글씨 손편지체"]
-  const [profilImageData, getProfileImageData] = useState<ProfileImage[]>([]);
+  const [profilImageData, setProfileImageData] = useState<string[]>([]);
+  const relationshipOption = ["친구", "지인", "동료", "가족"];
+  const [relationshipData, setRelationshipData] = useState(relationshipOption[0]);
+  const fontOption = ["Noto Sans", "Pretendard", "나눔명조", "나눔손글씨 손편지체"]
+  const [fontData, setFontData] = useState(fontOption[0]);
   const [selecteImage, setSelecteImage] = useState<string | null>(null);
-
   const [name, setName] = useState("")
   const [content, setContent] = useState("");
-  
   const [errorNameMessage, setErrorNameMessage] = useState("");
   const [errorContentMessage, setErrorContentMessage] = useState("");
-
-  console.log(profilImageData);
 
   useEffect(() => {
 
@@ -35,7 +29,8 @@ export default function MessageCreatePage() {
       try {
         const response = await getProfilimage()
         if (response) {
-          getProfileImageData(response.imageUrls);
+          setProfileImageData(response.imageUrls);
+          setSelecteImage(response.imageUrls[0]);
         }
       } catch (error) {
         console.error("프로필이미지 불러오기 실패:", error);
@@ -47,7 +42,7 @@ export default function MessageCreatePage() {
 
   }, [])
 
-  function handleImageSelect(data: any) {
+  function handleImageSelect(data: string) {
     setSelecteImage(data);
   }
 
@@ -91,7 +86,7 @@ export default function MessageCreatePage() {
             <h2 className={styles.title}>프로필 이미지</h2>
             <div className={styles.profileImgBox}>
               <div className={styles.selectImgBox}>
-                <img src={`${selecteImage ? `${selecteImage}` : "/public/assets/images/sub/default_img.svg"}`} alt="" />
+                <img src={`${selecteImage}`} alt="프로필이미지" />
               </div>
               <div className={styles.profileSelectBox}>
                 <p>
@@ -99,11 +94,11 @@ export default function MessageCreatePage() {
                 </p>
                 <div className={styles.selectImgList}>
                   {
-                    profilImageData.map((data, index) => {
+                    profilImageData.map((data: string, index) => {
                       return (
 
                         <button
-                          className={styles.selectButton}
+                          className={`${styles.selectButton} ${selecteImage === data ? `${styles.active}` : ""}`}
                           key={index}
                           onClick={() => handleImageSelect(data)}
                         >
@@ -121,8 +116,9 @@ export default function MessageCreatePage() {
             <h2 className={styles.title}>상대와의관계</h2>
             <Dropdown
               className={styles.dropdownBox}
-              label="선택"
-              option={relationship}
+              value={relationshipData}
+              option={relationshipOption}
+              onSelect={setRelationshipData}
             />
           </div>
           <div className={styles.box}>
@@ -137,12 +133,16 @@ export default function MessageCreatePage() {
             <h2 className={styles.title}>폰트 선택</h2>
             <Dropdown
               className={styles.dropdownBox}
-              label="선택"
-              option={font}
+              value={fontData}
+              option={fontOption}
+              onSelect={setFontData}
             />
           </div>
           <Button
             text="생성하기"
+            disabled={
+              name.trim() === "" || content.trim() === ""
+            }
           />
         </Container>
       </ Main>

@@ -33,6 +33,18 @@ export async function getMessage(id: string) {
   }
 }
 
+//롤링페이퍼 대상 메세지 생성
+export async function postMessage(id: string) {
+
+  try {
+    const response = await axios.post(`${BASE_URL}/12-4/recipients/${id}/messages/`);
+    return response.data;
+  } catch (error) {
+    console.error("롤링페이퍼 대상에게 보내는 메세지 전송 실패:", error);
+  }
+
+}
+
 //롤링페이퍼 대상 생성
 export async function postRecipient(recipientData: {
   name: string;

@@ -3,17 +3,17 @@ import styles from "./Dropdown.module.css"
 
 interface DropdownProps {
 
-  label?: string;
+  value?: string;
   disabled?: boolean;
   error?: string;
   option?: string[];
   className?: string;
+  onSelect?: (value: string) => void;
 }
 
-export default function Dropdown({ className, label, disabled, error, option = [] }: DropdownProps) {
+export default function Dropdown({ onSelect, className, disabled, error, option = [], value }: DropdownProps) {
 
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(label);
 
   function handleToggleDropdown() {
 
@@ -27,8 +27,8 @@ export default function Dropdown({ className, label, disabled, error, option = [
 
   function handleOptionClick(value: string) {
 
-    setSelectedValue(value);
     setIsOpen(false);
+    if (onSelect) onSelect(value);
 
   }
 
@@ -40,7 +40,7 @@ export default function Dropdown({ className, label, disabled, error, option = [
           disabled={disabled}
           onClick={handleToggleDropdown}
         >
-          {selectedValue}
+          {value}
         </button>
         <ul className={`${styles.optionList} ${isOpen ? `${styles.active}` : ""}`}>
           {

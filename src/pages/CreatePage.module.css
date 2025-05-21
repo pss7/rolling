@@ -128,6 +128,10 @@
   overflow: hidden;
 }
 
+.profileImgBox .profileSelectBox .selectImgList .selectButton.active {
+  border: 2px solid var(--purple600);
+}
+
 .profileImgBox .profileSelectBox .selectImgList .selectButton img {
   display: block;
   width: 100%;
