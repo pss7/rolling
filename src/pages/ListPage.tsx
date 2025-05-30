@@ -30,9 +30,7 @@ export default function ListPage() {
   }
 
   const [count, setCount] = useState<number | null>(null);
-   console.log(count); 
   const [listData, setListData] = useState<Recipient[]>([]);
-  console.log(listData);
   const [sortedListData, setSortedListData] = useState<Recipient[]>([]);
 
   useEffect(() => {
