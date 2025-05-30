@@ -4,13 +4,16 @@ import Header from "../components/layout/Header";
 import Main from "../components/layout/Main";
 import Input from "../components/ui/Input";
 import styles from "./CreatePage.module.css";
-import { getProfilimage } from "../api/list";
+import { getProfilimage, postMessage } from "../api/list";
 import Dropdown from "../components/ui/Dropdown";
 import Textarea from "../components/ui/Textarea";
 import Button from "../components/ui/Button";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function MessageCreatePage() {
 
+  const navigate = useNavigate();
+  const { id } = useParams<{ id: string }>();
   const [profilImageData, setProfileImageData] = useState<string[]>([]);
   const relationshipOption = ["친구", "지인", "동료", "가족"];
   const [relationshipData, setRelationshipData] = useState(relationshipOption[0]);
@@ -66,6 +69,26 @@ export default function MessageCreatePage() {
     if (content.trim() === "") {
       setErrorContentMessage("내용을 입력해 주세요.");
     }
+  }
+
+  async function handleMessage() {
+
+    const messageData = {
+      sender: name,
+      relationship: relationshipData,
+      content: content,
+      font: fontData,
+      profileImageURL: selecteImage,
+    }
+
+    try {
+      const response = await postMessage(id!, messageData);
+      console.log("롤링페이퍼 대상 메세지 생성 완료", response);
+      navigate(`/message-list/${id}`);
+    } catch (error) {
+      console.error("롤링페이퍼 대상에게 보내는 메세지 전송 실패:", error);
+    }
+
   }
 
   return (
@@ -143,6 +166,7 @@ export default function MessageCreatePage() {
             disabled={
               name.trim() === "" || content.trim() === ""
             }
+            onClick={handleMessage}
           />
         </Container>
       </ Main>

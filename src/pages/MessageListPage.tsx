@@ -320,7 +320,7 @@ export default function MessageListPage() {
         <Container>
           <ul className={styles.messageList}>
             <li className={styles.link}>
-              <Link to="#">
+              <Link to={`/message-create/${id}`}>
                 <span className="blind">
                   롤링페이퍼 작성 페이지로 이동
                 </span>
