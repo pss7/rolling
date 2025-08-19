@@ -1,12 +1,12 @@
 import { Routes, Route } from 'react-router-dom';
 import Component from './pages/test/Component';
-import Home from './pages/test/Home';
 import ListPage from './pages/ListPage';
 import MessageListPage from './pages/MessageListPage';
 import CreatePage from './pages/CreatePage';
 import MessageCreatePage from './pages/MessageCreatePage';
 import { useEffect, useState } from 'react';
 import FullScreenLoading from './components/ui/FullScreenLoading';
+import Home from './pages/Home';
 
 function App() {
 
